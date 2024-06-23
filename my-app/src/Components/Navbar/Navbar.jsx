@@ -62,7 +62,7 @@ const Navbar = () => {
               to={link.path} // Use `to` instead of `href`
               key={index}
               className={`capitalize font-medium hover:text-accent transition-all text-sm items-center flex ${
-                activeLink === link.path || (activeLink === "/" && link.path === "/semi") ? " font-extrabold text-accent border-b-2 border-accent" : ""
+                activeLink === link.path ? " font-extrabold text-accent border-b-2 border-accent" : ""
               }`}
             >
               {link.name}
