@@ -73,7 +73,7 @@ const Navbar = () => {
       <div className="flex items-center hidden lg:flex">
         <a href="#_" className="px-2 py-1 relative rounded group overflow-hidden font-medium bg-yellow-50 border-2 border-primary text-primary inline-block">
           <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-primary group-hover:h-full opacity-90"></span>
-          <span className="relative group-hover:text-white text-sm font-bold">Button Text</span>
+          <span className="relative group-hover:text-white text-sm font-bold">Contact us</span>
         </a>
       </div>
       <div className="mobile-nav lg:hidden">
