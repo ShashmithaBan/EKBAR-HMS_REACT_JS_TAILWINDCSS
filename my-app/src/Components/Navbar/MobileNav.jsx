@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 
 const links = [
   {
+    name: "Home",
+    path: "/",
+  },
+  {
     name: "Semi",
     path: "/semi",
   },

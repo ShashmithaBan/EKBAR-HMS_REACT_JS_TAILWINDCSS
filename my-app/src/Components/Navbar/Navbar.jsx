@@ -51,9 +51,9 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <div className='flex justify-between'>
+    <div className='flex justify-between xl:mx-64 mx-12 py-4 '>
       <div className="nav-title font-mono text-2xl font-bold text-primary">
-        <Link to='/'>Ekbar Hotels</Link>
+        <Link to='/'>Ekbar Hotels </Link>
       </div>
       <div className="navbar hidden lg:flex">
         <nav ref={navRef} className="flex gap-8">
