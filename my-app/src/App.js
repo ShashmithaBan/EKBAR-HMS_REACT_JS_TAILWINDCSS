@@ -4,11 +4,11 @@ import Navbar from './Components/Navbar/Navbar';
 import { Semi } from './Components/Pages/Semi';
 import {Luxury} from './Components/Pages/Luxury'
 import {AddBooking} from './Components/Pages/AddBooking'
-import { Home } from './Components/Pages/Home';
+import { Home } from './Components/Pages/Home/Home';
 
 function App() {
   return (
-    <div className="xl:mx-64 mx-12 py-4 font-mono">
+    <div className="font-mono">
       <BrowserRouter>
         <Navbar />
         <Routes>
