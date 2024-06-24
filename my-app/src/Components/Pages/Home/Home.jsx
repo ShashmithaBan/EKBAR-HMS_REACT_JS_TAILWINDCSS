@@ -77,7 +77,7 @@ Located in the heart of Colombo <b>EkBar Hotels</b> offers a
         <div className="about-img shadow-lg">
             <img
             src='https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.png'
-            className='lg:w-[132rem] object-cover  h-[330px] '
+            className='lg:w-[110rem] object-cover  h-[330px] '
             />
         </div>
     </div>
@@ -86,7 +86,7 @@ Located in the heart of Colombo <b>EkBar Hotels</b> offers a
         <div className="about-img shadow-lg">
             <img
             src='https://plus.unsplash.com/premium_photo-1661964326936-831e134bef7d?q=80&w=3435&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.png'
-            className='  lg:w-[40rem] object-cover h-[330px] '
+            className='  lg:w-[37.5rem] object-cover h-[330px] '
             />
         </div>
         <div className="bg-[#ffca005c] lg:w-[40rem] lg:h-[250px]  xl:h-[280px] space-y-2 flex flex-col justify-center">

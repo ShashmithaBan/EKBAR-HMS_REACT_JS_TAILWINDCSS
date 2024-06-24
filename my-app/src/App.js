@@ -1,25 +1,39 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Signin } from './Components/Pages/Auth/Signin';
 import Navbar from './Components/Navbar/Navbar';
-import { Semi } from './Components/Pages/Semi';
-import {Luxury} from './Components/Pages/Luxury'
-import {AddBooking} from './Components/Pages/AddBooking'
 import { Home } from './Components/Pages/Home/Home';
+import { Semi } from './Components/Pages/Semi';
+import {Luxury} from './Components/Pages/Luxury';
+import { AddBooking } from './Components/Pages/AddBooking';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="font-mono">
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/semi' element={<Semi />} />
-          <Route path='/luxury' element={<Luxury />} />
-          <Route path='/addbooking' element={<AddBooking />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/signin'
+          element={<Signin/>}
+        />
+        <Route
+          path='*'
+          element={
+            <>
+              <Navbar />
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/semi' element={<Semi />} />
+                <Route path='/luxury' element={<Luxury />} />
+                <Route path='/addbooking' element={<AddBooking />} />
+              </Routes>
+              
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
