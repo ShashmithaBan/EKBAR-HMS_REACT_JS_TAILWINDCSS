@@ -1,81 +1,126 @@
+import { Grid, TextField } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
+import React from 'react';
+import { Button } from '@mui/material';
 
-import { Grid, TextField } from '@mui/material'
-import { Form, Formik } from 'formik'
-import React from 'react'
- 
 const initialValues = {
-    fullName : '',
-    email:'',
-    numOfAdults:'',
-    numOfChildren:'',
-    roomId:'',
-    checkInDate:'',
-    checkOutDate:''
-}
+  fullName: '',
+  email: '',
+  numOfAdults: '',
+  numOfChildren: '',
+  roomId: '',
+  checkInDate: '',
+  checkOutDate: ''
+};
 
 export const CreateBooking = () => {
-    const handleSubmit = () =>{
+    const handleSubmit = (values) => {
+        console.log('Form Values:', values);
+        
+      };
 
-    }
   return (
     <div className='flex flex-col'>
-        <h1 className="relative text-center lg:text-left text-2xl font-semibold">
-            Create Booking
-        </h1>
-        <div className="">
-        <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-            <Form className='space-y-4 px-2 lg:w-[1000px] mt-5 w-[400px]'>
-                <Grid container className='space-y-3 gap-2 flex justify-center items-center'>
-                    <Grid item xs={12}>
-                    <TextField
-                    color='warning'
-                    name = "fullName"
-                    label="Full Name" 
+      <h1 className="relative text-center lg:text-left text-2xl font-semibold">
+        Create Booking
+      </h1>
+      <div className="mt-5">
+      <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
+      
+        <Form>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Field name="fullName">
+                {({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Full Name"
                     variant="outlined"
                     fullWidth
-                    className='border-white'
                     
-                    />
-                    </Grid>
-                    <Grid item xs={6}>
-                    <TextField
-                    color='warning'
-                    name = "email"
-                    label="Email" 
+                  />
+                )}
+              </Field>
+            </Grid>
+            <Grid item xs={6}>
+              <Field name="email">
+                {({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Email"
                     variant="outlined"
                     fullWidth
-                    className='border-white'
-                    
-                    />
-                    </Grid>
-                    <Grid item xs={5}>
-                    <TextField
-                    color='warning'
-                    name = "email"
-                    label="Email" 
+                   
+                  />
+                )}
+              </Field>
+            </Grid>
+            <Grid item xs={2}>
+              <Field name="roomId">
+                {({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Room Id"
                     variant="outlined"
                     fullWidth
-                    className='border-white'
-                    
-                    />
-                    </Grid>
-                    <Grid item xs={4}>
-                    <TextField
-                    color='warning'
-                    name = "email"
-                    label="Email" 
+                   
+                  />
+                )}
+              </Field>
+            </Grid>
+            <Grid item xs={2}>
+              <Field name="numOfAdults">
+                {({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Num of Adults"
                     variant="outlined"
                     fullWidth
-                    className='border-white'
                     
-                    />
-                    </Grid>
-                </Grid>
-            
-            </Form>
-        </Formik>
-        </div>
-       
+                  />
+                )}
+              </Field>
+            </Grid>
+            <Grid item xs={2}>
+              <Field name="numOfChildren">
+                {({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Num of Children"
+                    variant="outlined"
+                    fullWidth
+                   
+                  />
+                )}
+              </Field>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+              fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  
+                    justifyContent:'center',
+                    backgroundColor: "#FFCF40",
+                    fontWeight: "bold",
+                    '&:hover': {
+                      backgroundColor: "#E5B935",
+                    }
+                  }}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </Form>
+     
+    </Formik>
+      </div>
     </div>
-  )
-}
+  );
+};
