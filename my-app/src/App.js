@@ -5,7 +5,7 @@ import Navbar from './Components/Navbar/Navbar';
 import { Home } from './Components/Pages/Home/Home';
 import { Semi } from './Components/Pages/Semi';
 import {Luxury} from './Components/Pages/Luxury';
-import { AddBooking } from './Components/Pages/AddBooking';
+import { AddBooking } from './Components/Pages/AddBooking/AddBooking';
 
 
 const App = () => {

@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -21,6 +22,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.9.0",
+    "react-simple-typewriter": "^5.0.1",
     "swiper": "^11.1.4",
     "web-vitals": "^2.1.4"
   },
