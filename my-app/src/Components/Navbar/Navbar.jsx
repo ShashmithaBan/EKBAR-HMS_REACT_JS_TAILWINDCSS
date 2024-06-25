@@ -18,10 +18,6 @@ const pageLinks = [
     name: "Add Booking",
     path: "/addbooking",
   },
-  {
-    name: "Sign In",
-    path: "/signin",
-  }
 ];
 
 const sectionLinks = [
@@ -83,7 +79,7 @@ const Navbar = () => {
               key={index}
               to={link.path}
               smooth={true}
-              duration={500}
+              duration={1000}
               className={`capitalize font-medium hover:text-accent transition-all text-sm items-center flex cursor-pointer ${
                 activeLink === `#${link.path}` ? " font-extrabold text-accent border-b-2 border-accent" : ""
               }`}

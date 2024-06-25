@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+hr {
+  border-top: 2px solid #d1d5db; /* Light gray color */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 75%; /* Width set to 75% of its container */
+}

@@ -46,7 +46,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <section id='about' className="about my-20 md:my-10 xl:mx-64 mx-12 md:py-4 flex flex-col justify-center items-center space-y-2">
+      <section id='about' className="about md:h-screen xl:mx-64 mx-12 md:py-4 flex flex-col justify-center items-center space-y-2">
         <div className="flex-row hidden lg:flex justify-center items-center">
           <div className="bg-[#790e0e54] p-9 lg:h-[250px] xl:h-[280px] space-y-2 flex flex-col justify-center">
             <h2 className=" text-center font-bold text-3xl bg-gradient-to-r from-neutral-300 via-neutral-700 to-black text-transparent bg-clip-text">
