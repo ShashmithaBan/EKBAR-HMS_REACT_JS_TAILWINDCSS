@@ -21,12 +21,20 @@ export const BTTracker = () => {
     <Formik onSubmit={handleSubmit} initialValues={initialValues}>
     <Form className='flex flex-col space-y-5 justify-center items-center' >
     <Field
+       as = {TextField}
         fullWidth
         id="bCode"
         name="bCode"
         label="Booking Confirmation Code"
         variant="outlined"
-        className='w-[300px] lg:w-[400px] h-10 border-2 rounded-md border-accent  p-2'
+        InputLabelProps={{
+          style: {
+            padding: '0 3px', 
+          },
+        }}
+          
+
+        
       />
       <Button type='submit' name='submit' variant='contained' sx={{
           width: 300,

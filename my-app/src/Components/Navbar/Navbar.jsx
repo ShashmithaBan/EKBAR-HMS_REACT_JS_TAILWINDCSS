@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MobileNav } from './MobileNav';
 import { IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link as ScrollLink } from 'react-scroll';
 
-const links = [
+const pageLinks = [
   {
     name: "Semi",
     path: "/semi",
@@ -18,36 +19,44 @@ const links = [
     path: "/addbooking",
   },
   {
+    name: "Sign In",
+    path: "/signin",
+  }
+];
+
+const sectionLinks = [
+  {
     name: "About us",
-    path: "#about",
-  },
+    path: "about",
+  }
 ];
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(""); 
-  const navRef = useRef(null);
   const location = useLocation(); 
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
 
-      links.forEach(link => {
-        const section = document.querySelector(link.path);
+      sectionLinks.forEach(link => {
+        const section = document.getElementById(link.path);
         if (section) {
           const sectionTop = section.offsetTop - 100; 
           const sectionBottom = sectionTop + section.clientHeight;
 
           if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            setActiveLink(link.path);
+            setActiveLink(`#${link.path}`);
           }
         }
       });
+    };
 
-  }},[])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
-   
     setActiveLink(location.pathname);
   }, [location.pathname]);
 
@@ -57,10 +66,10 @@ const Navbar = () => {
         <Link to='/'>Ekbar Hotels </Link>
       </div>
       <div className="navbar hidden lg:flex">
-        <nav ref={navRef} className="flex gap-8">
-          {links.map((link, index) => (
+        <nav className="flex gap-8">
+          {pageLinks.map((link, index) => (
             <Link
-              to={link.path} 
+              to={link.path}
               key={index}
               className={`capitalize font-medium hover:text-accent transition-all text-sm items-center flex ${
                 activeLink === link.path ? " font-extrabold text-accent border-b-2 border-accent" : ""
@@ -68,6 +77,19 @@ const Navbar = () => {
             >
               {link.name}
             </Link>
+          ))}
+          {sectionLinks.map((link, index) => (
+            <ScrollLink
+              key={index}
+              to={link.path}
+              smooth={true}
+              duration={500}
+              className={`capitalize font-medium hover:text-accent transition-all text-sm items-center flex cursor-pointer ${
+                activeLink === `#${link.path}` ? " font-extrabold text-accent border-b-2 border-accent" : ""
+              }`}
+            >
+              {link.name}
+            </ScrollLink>
           ))}
         </nav>
       </div>
