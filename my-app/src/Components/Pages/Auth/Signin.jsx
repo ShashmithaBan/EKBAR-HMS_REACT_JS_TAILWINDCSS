@@ -1,8 +1,9 @@
 import React from 'react'
 import '../Auth/Signin.css'
 import { Field, Form, Formik } from 'formik'
-import { Button, TextField, Typography } from '@mui/material'
+import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 
 
@@ -22,8 +23,16 @@ export const Signin = () => {
     console.log('form values',values)
     
   }
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
+    
     <div className='back  '>
         <div className="flex h-screen justify-center items-center bg-[#00000040]">
           <div className="flex justify-center items-center flex-col gap-2 p-5 py-5 shadow-xl  backdrop-blur-sm bg-[#ffffff63] rounded-lg">
@@ -46,6 +55,19 @@ export const Signin = () => {
                     label="Password" 
                     variant="outlined"
                     fullWidth
+                    type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
                   
                     />
                     <Button type='submit' variant='contained'  sx={{
