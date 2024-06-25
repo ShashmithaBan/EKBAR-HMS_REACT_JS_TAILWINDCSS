@@ -18,8 +18,9 @@ const initialValues ={
 export const Signin = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = () =>{
-
+  const handleSubmit = (values) =>{
+    console.log('form values',values)
+    
   }
 
   return (
@@ -27,7 +28,7 @@ export const Signin = () => {
         <div className="flex h-screen justify-center items-center bg-[#00000040]">
           <div className="flex justify-center items-center flex-col gap-2 p-5 py-5 shadow-xl  backdrop-blur-sm bg-[#ffffff63] rounded-lg">
             <h1 className='text-2xl font-bold text-white'>Admin Login</h1>
-          <Formik onSubmit={handleSubmit}>
+          <Formik onSubmit={handleSubmit} initialValues={initialValues}>
                 <Form className='flex flex-col w-[330px] space-y-5 '>
                     <TextField
                     

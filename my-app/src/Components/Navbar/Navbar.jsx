@@ -59,7 +59,7 @@ const Navbar = () => {
   return (
     <div className='flex justify-between items-center xl:mx-64 mx-12 py-4 '>
       <div className="nav-title font-mono text-2xl font-bold text-primary flex">
-        <Link to='/'>Ekbar Hotels </Link>
+        <Link to='/'>EkBar Hotels </Link>
       </div>
       <div className="navbar hidden lg:flex">
         <nav className="flex gap-8">
