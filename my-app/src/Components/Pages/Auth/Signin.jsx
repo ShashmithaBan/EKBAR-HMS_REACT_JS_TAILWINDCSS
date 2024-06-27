@@ -33,8 +33,8 @@ export const Signin = () => {
 
   return (
     
-    <div className='back  '>
-        <div className="flex h-screen justify-center items-center bg-[#00000040]">
+    <div className='back flex justify-center '>
+        <div className="flex h-screen justify-center items-center bg-[#00000040] ">
           <div className="flex justify-center items-center flex-col gap-2 p-5 py-5 shadow-xl  backdrop-blur-sm bg-[#ffffff63] rounded-lg">
             <h1 className='text-2xl font-bold text-white'>Admin Login</h1>
           <Formik onSubmit={handleSubmit} initialValues={initialValues}>
@@ -83,7 +83,7 @@ export const Signin = () => {
                     </Button>
                 </Form>
              </Formik>
-             <Typography variant="body2" align="center" gutterBottom className='w-[300px] text-red-900'>
+             <Typography variant="body2" fontWeight={'bold'} align="center" fontFamily={'monospace'} gutterBottom className='w-[300px] text-red-800 '>
   Only Admins can log in to the site. Customers can book their rooms without logging in. <br/>
   <span className='text-neutral-800'>If you are a Customer </span><button className='text-white underline'  onClick={()=>navigate('/') }>Click Here</button>
   
