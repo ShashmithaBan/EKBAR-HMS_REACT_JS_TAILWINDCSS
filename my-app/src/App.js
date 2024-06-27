@@ -6,6 +6,7 @@ import { Home } from './Components/Pages/Home/Home';
 import { Semi } from './Components/Pages/Semi';
 import {Luxury} from './Components/Pages/Luxury';
 import { AddBooking } from './Components/Pages/AddBooking/AddBooking';
+import { AddRoom } from './Components/Pages/AddRoom/AddRoom';
 
 
 const App = () => {
@@ -15,6 +16,10 @@ const App = () => {
         <Route
           path='/signin'
           element={<Signin/>}
+        />
+        <Route
+          path='/addroom'
+          element={<AddRoom/>}
         />
         <Route
           path='*'
