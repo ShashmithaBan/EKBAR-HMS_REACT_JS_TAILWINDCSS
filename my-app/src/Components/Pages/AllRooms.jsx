@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react';
-import { Rooms } from './Rooms/Rooms';
-import { useDispatch, useSelector } from 'react-redux';
-import { getrooms } from '../Store/roomSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getrooms } from "../Store/roomSlice";
+import { Rooms } from "../Pages/Rooms/Rooms"
 
 export const AllRooms = () => {
   const dispatch = useDispatch();
-  const rooms = useSelector((state) => {
-    console.log("state.." , state.room.rooms); // Adjust this according to your state structure
-    return state.room.rooms; // Make sure to return the rooms array
-  });
+  const room = useSelector(state => state.room.rooms);
+  const loading = useSelector(state => state.room.loading);
+  const error = useSelector(state => state.room.error);
 
   useEffect(() => {
     dispatch(getrooms());
   }, [dispatch]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className='xl:mx-64 mx-12 py-10 flex flex-col justify-center items-center'>
@@ -22,9 +24,9 @@ export const AllRooms = () => {
 
       <hr className='border-gray-400 w-3/4 my-4' />
       <div className="rooms flex flex-wrap gap-5 mt-10">
-        {rooms && rooms.length > 0 ? (
-          rooms.map((room, index) => (
-            <Rooms key={index} room={room} />
+        {Array.isArray(room) && room.length > 0 ? (
+          room.map((singleRoom, index) => (
+            <Rooms key={index} room={singleRoom} />
           ))
         ) : (
           <p>No rooms available</p>

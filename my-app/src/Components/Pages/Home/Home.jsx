@@ -22,8 +22,9 @@ export const Home = () => {
     }
   }, [status, dispatch]);
 
-  // const vipRooms = rooms.filter(room => room.roomType === 'VIP').slice(0, 3);
-  // const budgetRooms = rooms.filter(room => room.roomType === 'Budget').slice(0, 3);
+  const vipRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'VIP').slice(0, 3) : [];
+  const budgetRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'Budget').slice(0, 3) : [];
+
 
   return (
     <div className="flex flex-col space-y-10">
@@ -52,9 +53,9 @@ export const Home = () => {
             <div className="rooms my-10 flex flex-wrap gap-7 justify-center items-center">
             {status === 'loading' && <p>Loading...</p>}
               {status === 'failed' && <p>Error: {error}</p>}
-              {/* {vipRooms.map((room, index) => (
+              {vipRooms.map((room, index) => (
                 <VIP key={index} room={room} />
-              ))} */}
+              ))}
             </div>
           </div>
         </div>
@@ -65,9 +66,9 @@ export const Home = () => {
           <div className="rooms mt-10 flex flex-wrap gap-7 justify-center items-center">
           {status === 'loading' && <p>Loading...</p>}
             {status === 'failed' && <p>Error: {error}</p>}
-            {/* {budgetRooms.map((room, index) => (
+            {budgetRooms.map((room, index) => (
               <Budget key={index} room={room} />
-            ))} */}
+            ))}
           </div>
         </div>
       </section>

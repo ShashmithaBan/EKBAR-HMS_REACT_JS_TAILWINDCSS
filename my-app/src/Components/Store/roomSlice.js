@@ -1,4 +1,3 @@
-// roomSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -15,31 +14,34 @@ export const addRoom = createAsyncThunk(
     }
   }
 );
+
 export const getrooms = createAsyncThunk(
   'room/getRooms',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(`${API}/api/rooms`);
+      console.log('Response:', JSON.stringify(response.data, null, 2));
       return response.data; 
     } catch (error) {
+      console.error('Error:', error.response?.data || error.message);
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
 
+
 export const getRoomsByType = createAsyncThunk(
   'room/getRoomByType',
-  async(keyword,thunkAPI)=>{
+  async (keyword, thunkAPI) => {
     try {
-      const response = await axios.get(`${API}/api/rooms/type/available?type=${keyword}`)
+      const response = await axios.get(`${API}/api/rooms/type/available?type=${keyword}`);
       return response.data;
     } catch (error) {
-
-       return thunkAPI.rejectWithValue(error.response?.data || error.message);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
-)
+);
 
 export const roomSlice = createSlice({
   name: 'room',
