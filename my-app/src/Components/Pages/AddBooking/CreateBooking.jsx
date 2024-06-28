@@ -1,11 +1,9 @@
-import { Grid, TextField, Button, Tooltip, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Field, Form, Formik } from 'formik';
 import React from 'react';
+import { Grid, TextField, Button } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
 import { useDispatch } from 'react-redux';
 import { addBooking } from '../../Store/bookRoomSlice';
 
@@ -14,21 +12,17 @@ const initialValues = {
   guestEmail: '',
   numOfAdults: '',
   numOfChildren: '',
-  roomId: '',
+  roomId: '', 
   checkInDate: null,
   checkOutDate: null,
 };
 
+export const CreateBooking = ({ id }) => {
+  const dispatch = useDispatch();
 
-
-
-
-export const CreateBooking = () => {
-  const dispatch = useDispatch()
   const handleSubmit = (values) => {
     console.log('Form Values:', values);
     dispatch(addBooking(values));
-  
   };
 
   return (
@@ -38,7 +32,7 @@ export const CreateBooking = () => {
       </h1>
       <div className="mt-5">
         <Formik
-          initialValues={initialValues}
+          initialValues={{ ...initialValues, roomId: id }}  
           onSubmit={handleSubmit}
         >
           {({ setFieldValue }) => (
@@ -73,9 +67,10 @@ export const CreateBooking = () => {
                     {({ field }) => (
                       <TextField
                         {...field}
-                        label="Room Id"
+                        label={id ? 'Room' : 'Room'}
                         variant="outlined"
                         fullWidth
+                       
                       />
                     )}
                   </Field>
@@ -104,7 +99,7 @@ export const CreateBooking = () => {
                     )}
                   </Field>
                 </Grid>
-                <Grid item xs={6} >
+                <Grid item xs={6}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Field name="checkInDate">
                       {({ field }) => (
@@ -117,21 +112,21 @@ export const CreateBooking = () => {
                         />
                       )}
                     </Field>
-                    </LocalizationProvider>
+                  </LocalizationProvider>
                 </Grid>
-                <Grid item xs={6} >
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Field name="checkOutDate">
-                    {({ field }) => (
-                      <DatePicker
-                        {...field}
-                        label="Check-out Date"
-                        inputFormat="DD/MM/YYYY"
-                        renderInput={(params) => <TextField {...params} fullWidth />}
-                        onChange={(value) => setFieldValue('checkOutDate', value)}
-                      />
-                    )}
-                  </Field>
+                <Grid item xs={6}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Field name="checkOutDate">
+                      {({ field }) => (
+                        <DatePicker
+                          {...field}
+                          label="Check-out Date"
+                          inputFormat="DD/MM/YYYY"
+                          renderInput={(params) => <TextField {...params} fullWidth />}
+                          onChange={(value) => setFieldValue('checkOutDate', value)}
+                        />
+                      )}
+                    </Field>
                   </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12}>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { CreateBooking } from './CreateBooking';
+import { useParams } from 'react-router-dom';
 
 export const AddBooking = () => {
+  const { id } = useParams();
   const [text] = useTypewriter({
     words: [
       ' We look forward to hosting you.',
@@ -27,9 +29,9 @@ export const AddBooking = () => {
       </p>
       <hr className='border-gray-400 w-3/4 my-4' />
       <div className="">
-        <CreateBooking/>
+        <CreateBooking id={id}/>
       </div>
-    </div>
+    </div> 
   );
 };
 

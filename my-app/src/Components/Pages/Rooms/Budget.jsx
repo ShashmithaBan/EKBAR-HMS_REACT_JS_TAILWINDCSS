@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 export const Budget = ({room}) => {
   const navigate = useNavigate();
+  if (!room) {
+    return null; 
+  }
   return (
     <div className='bg-white rounded-3xl w-[370px] h-[290px] shadow-lg'>
      <img src = {room.images[0]}

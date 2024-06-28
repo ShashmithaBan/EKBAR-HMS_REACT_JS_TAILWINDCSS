@@ -1,18 +1,17 @@
-
 import React, { useEffect } from 'react';
+import { Rooms } from './Rooms/Rooms';
 import { useDispatch, useSelector } from 'react-redux';
 import { getrooms } from '../Store/roomSlice';
-import { Rooms } from './Rooms/Rooms';
 
 export const AllRooms = () => {
   const dispatch = useDispatch();
-  const rooms = useSelector((state) => state.room.rooms);
-  const loading = useSelector((state) => state.room.loading);
-  const error = useSelector((state) => state.room.error);
+  const rooms = useSelector((state) => {
+    console.log("state.." , state.room.rooms); // Adjust this according to your state structure
+    return state.room.rooms; // Make sure to return the rooms array
+  });
 
   useEffect(() => {
     dispatch(getrooms());
-    
   }, [dispatch]);
 
   return (
@@ -22,18 +21,15 @@ export const AllRooms = () => {
       </h1>
 
       <hr className='border-gray-400 w-3/4 my-4' />
-
       <div className="rooms flex flex-wrap gap-5 mt-10">
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
         {rooms && rooms.length > 0 ? (
           rooms.map((room, index) => (
             <Rooms key={index} room={room} />
           ))
         ) : (
-          !loading && <p>No rooms available</p>
+          <p>No rooms available</p>
         )}
       </div>
     </div>
   );
-}
+};

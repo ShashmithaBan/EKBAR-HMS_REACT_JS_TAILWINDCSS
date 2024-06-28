@@ -15,18 +15,19 @@ export const addRoom = createAsyncThunk(
     }
   }
 );
-
 export const getrooms = createAsyncThunk(
-  'room/getRoom',
+  'room/getRooms',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(`${API}/api/rooms`);
-      return response.data;
+      return response.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
+
+
 export const getRoomsByType = createAsyncThunk(
   'room/getRoomByType',
   async(keyword,thunkAPI)=>{
@@ -89,6 +90,6 @@ export const roomSlice = createSlice({
   },
 });
 
-export const { } = roomSlice.actions; // Add any actions if needed
+export const { } = roomSlice.actions; 
 
 export default roomSlice.reducer;
