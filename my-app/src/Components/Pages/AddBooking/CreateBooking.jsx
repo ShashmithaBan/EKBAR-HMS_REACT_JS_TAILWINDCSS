@@ -6,10 +6,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import { addBooking } from '../../Store/bookRoomSlice';
 
 const initialValues = {
-  fullName: '',
-  email: '',
+  guestFullName: '',
+  guestEmail: '',
   numOfAdults: '',
   numOfChildren: '',
   roomId: '',
@@ -22,8 +24,11 @@ const initialValues = {
 
 
 export const CreateBooking = () => {
+  const dispatch = useDispatch()
   const handleSubmit = (values) => {
     console.log('Form Values:', values);
+    dispatch(addBooking(values));
+  
   };
 
   return (
@@ -40,7 +45,7 @@ export const CreateBooking = () => {
             <Form>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Field name="fullName">
+                  <Field name="guestFullName">
                     {({ field }) => (
                       <TextField
                         {...field}
@@ -52,7 +57,7 @@ export const CreateBooking = () => {
                   </Field>
                 </Grid>
                 <Grid item md={6} xs={12}>
-                  <Field name="email">
+                  <Field name="guestEmail">
                     {({ field }) => (
                       <TextField
                         {...field}

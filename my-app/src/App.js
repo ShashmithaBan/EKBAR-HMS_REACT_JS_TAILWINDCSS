@@ -7,6 +7,7 @@ import { Semi } from './Components/Pages/Semi';
 import {Luxury} from './Components/Pages/Luxury';
 import { AddBooking } from './Components/Pages/AddBooking/AddBooking';
 import { AddRoom } from './Components/Pages/AddRoom/AddRoom';
+import { AllRooms } from './Components/Pages/AllRooms';
 
 
 const App = () => {
@@ -20,6 +21,10 @@ const App = () => {
         <Route
           path='/addroom'
           element={<AddRoom/>}
+        />
+        <Route
+          path='/rooms'
+          element={<AllRooms/>}
         />
         <Route
           path='*'

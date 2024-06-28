@@ -1,17 +1,33 @@
-import { Grid, TextField, Button, IconButton, CircularProgress, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import CloseIcon from '@mui/icons-material/Close';
-import { uploadImageToCloudinary } from '../util/UploadToCloudinary'; 
+import {
+  Grid,
+  TextField,
+  Button,
+  IconButton,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CloseIcon from "@mui/icons-material/Close";
+import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
+import { useDispatch } from "react-redux";
+import { addRoom } from "../../Store/roomSlice";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
-  roomType: '',
-  roomPrice: '',
+  roomType: "",
+  roomPrice: "",
   images: [],
+  pin: "1234",
 };
 
 export const AddRoom = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [uploadImage, setUploadImage] = useState(false);
 
   const handleImageChange = async (e, setFieldValue, values) => {
@@ -19,10 +35,10 @@ export const AddRoom = () => {
     setUploadImage(true);
     try {
       const imageUrl = await uploadImageToCloudinary(file);
-      console.log('Uploaded Image URL:', imageUrl); 
+      console.log("Uploaded Image URL:", imageUrl);
       setFieldValue("images", [...values.images, imageUrl]);
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
     } finally {
       setUploadImage(false);
     }
@@ -34,37 +50,36 @@ export const AddRoom = () => {
     setFieldValue("images", updatedImages);
   };
 
-  const handleSubmit = (values) => {
-    console.log('Form Values:', values);
+  const handleSubmit = (values, { resetForm }) => {
+    console.log("Form Values:", values);
+    dispatch(addRoom(values));
+    resetForm();
   };
 
   return (
-    <div className='flex flex-col xl:mx-64 mx-12 py-10 justify-center items-center'>
+    <div className="flex flex-col xl:mx-64 mx-12 py-10 justify-center items-center">
       <h1 className="relative text-center lg:text-left text-2xl font-semibold">
         Add New Room
       </h1>
       <div className="mt-5">
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ setFieldValue, values }) => (
             <Form>
               <Grid container spacing={2}>
-                <Grid item xs={12} className='flex flex-wrap gap-5'>
+                <Grid item xs={12} className="flex flex-wrap gap-5">
                   <input
-                    type='file'
-                    accept='image/*'
-                    id='fileInput'
-                    style={{ display: 'none' }}
+                    type="file"
+                    accept="image/*"
+                    id="fileInput"
+                    style={{ display: "none" }}
                     onChange={(e) => handleImageChange(e, setFieldValue, values)}
                   />
-                  <label className='relative' htmlFor='fileInput'>
-                    <span className='w-24 h-24 cursor-pointer flex border-black items-center justify-center p-2 border rounded-md hover:border-yellow-500'>
-                      <AddPhotoAlternateIcon className='text-black hover:text-yellow-500' />
+                  <label className="relative" htmlFor="fileInput">
+                    <span className="w-24 h-24 cursor-pointer flex border-black items-center justify-center p-2 border rounded-md hover:border-yellow-500">
+                      <AddPhotoAlternateIcon className="text-black hover:text-yellow-500" />
                     </span>
                     {uploadImage && (
-                      <div className='absolute left-0 right-0 top-7 bottom-0 w-24 h-24 flex justify-center'>
+                      <div className="absolute left-0 right-0 top-7 bottom-0 w-24 h-24 flex justify-center">
                         <CircularProgress />
                       </div>
                     )}
@@ -72,15 +87,16 @@ export const AddRoom = () => {
                   <div className="flex flex-wrap gap-2">
                     {values.images.map((item, index) => (
                       <div key={index} className="relative">
-                        <img className='w-24 h-24 object-cover' src={item} alt='' />
+                        <img className="w-24 h-24 object-cover" src={item} alt="" />
                         <IconButton
                           sx={{
                             position: "absolute",
                             top: 0,
                             right: 0,
-                            outline: "none"
+                            outline: "none",
                           }}
-                          onClick={() => handleRemoveImage(index, values, setFieldValue)}>
+                          onClick={() => handleRemoveImage(index, values, setFieldValue)}
+                        >
                           <CloseIcon />
                         </IconButton>
                       </div>
@@ -109,8 +125,8 @@ export const AddRoom = () => {
                           id="roomType"
                           label="Room Type"
                           {...field}
-                          value={field.value} // Ensure Select has the correct value
-                          onChange={(e) => setFieldValue('roomType', e.target.value)}
+                          value={field.value}
+                          onChange={(e) => setFieldValue("roomType", e.target.value)}
                         >
                           <MenuItem value="VIP">VIP</MenuItem>
                           <MenuItem value="Semi">Semi Luxury</MenuItem>
@@ -126,12 +142,12 @@ export const AddRoom = () => {
                     variant="contained"
                     color="primary"
                     sx={{
-                      justifyContent: 'center',
+                      justifyContent: "center",
                       backgroundColor: "#FFCF40",
                       fontWeight: "bold",
-                      '&:hover': {
+                      "&:hover": {
                         backgroundColor: "#E5B935",
-                      }
+                      },
                     }}
                   >
                     Submit
