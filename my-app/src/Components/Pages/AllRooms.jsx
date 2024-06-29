@@ -9,6 +9,9 @@ export const AllRooms = () => {
   const loading = useSelector(state => state.room.loading);
   const error = useSelector(state => state.room.error);
 
+console.log('...rooms' , room)
+
+
   useEffect(() => {
     dispatch(getrooms());
   }, [dispatch]);
