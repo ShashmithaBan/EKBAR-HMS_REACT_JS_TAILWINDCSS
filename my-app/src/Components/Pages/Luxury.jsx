@@ -8,7 +8,7 @@ export const Luxury = () => {
   const vip = useSelector((state) => state.room.rooms)
   const loading = useSelector((state) => state.room.loading);
   const error = useSelector((state) => state.room.error);
-
+ console.log('rooms...' , vip)
 
   useEffect(() => {
     dispatch(getRoomsByType('VIP'));
