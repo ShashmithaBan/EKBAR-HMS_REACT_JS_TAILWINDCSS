@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, TextField, Button } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBooking } from '../../Store/bookRoomSlice';
 
 const initialValues = {
@@ -19,17 +19,31 @@ const initialValues = {
 
 export const CreateBooking = ({ id }) => {
   const dispatch = useDispatch();
-
+  const booking = useSelector((state)=>state.bookedroom.bookedrooms[0])
+  
+ 
   const handleSubmit = (values) => {
     console.log('Form Values:', values);
-    dispatch(addBooking(values));
+    
+    try {
+      dispatch(addBooking(values)); 
+     
+      
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
+   
   };
+  
 
   return (
     <div className='flex flex-col'>
       <h1 className="relative text-center lg:text-left text-2xl font-semibold">
         Create Booking
       </h1>
+      {booking&&<p className='w-full text-green-500 bg-green-100 text-center py-2 border-2 border-green-500 rounded text-xs'>
+          Your Room No is: <b>{booking.bookingConfirmationCode}</b>
+        </p>}
       <div className="mt-5">
         <Formik
           initialValues={{ ...initialValues, roomId: id }}  
@@ -151,6 +165,9 @@ export const CreateBooking = ({ id }) => {
             </Form>
           )}
         </Formik>
+        
+        
+     
       </div>
     </div>
   );

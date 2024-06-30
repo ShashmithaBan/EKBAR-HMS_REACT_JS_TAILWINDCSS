@@ -35,6 +35,7 @@ export const getRoomsByType = createAsyncThunk(
   'room/getRoomByType',
   async (keyword, thunkAPI) => {
     try {
+      console.log("hi")
       const response = await axios.get(`${API}/api/rooms/type/available?type=${keyword}`);
       return response.data;
     } catch (error) {
@@ -49,8 +50,13 @@ export const roomSlice = createSlice({
     loading: false,
     rooms: [],
     error: '',
+    addRoomStatus:null,
   },
-  reducers: {},
+  reducers: {
+    resetAddRoomStatus(state) {
+      state.addRoomStatus = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addRoom.pending, (state) => {
@@ -60,10 +66,12 @@ export const roomSlice = createSlice({
       .addCase(addRoom.fulfilled, (state, action) => {
         state.loading = false;
         state.rooms.push(action.payload);
+        state.addRoomStatus = 'success';
       })
       .addCase(addRoom.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to add room';
+        state.addRoomStatus = 'failed';
       })
       .addCase(getrooms.pending, (state) => {
         state.loading = true;
@@ -92,6 +100,6 @@ export const roomSlice = createSlice({
   },
 });
 
-export const { } = roomSlice.actions; 
+export const { resetAddRoomStatus } = roomSlice.actions; 
 
 export default roomSlice.reducer;
