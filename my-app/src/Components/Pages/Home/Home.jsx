@@ -9,22 +9,33 @@ import { getRoomsByType, getrooms } from '../../Store/roomSlice';
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const rooms = useSelector((state) => {
-    console.log(state.room.rooms)
-  });
+  const rooms = useSelector((state) => state.room.rooms);
   const status = useSelector((state) => state.room.status);
   const error = useSelector((state) => state.room.error);
 
- useEffect(() => {
-    if (status === 'idle') {
-      dispatch(getRoomsByType('VIP'));
-      dispatch(getRoomsByType('Budget'));
-    }
-  }, [status, dispatch]);
+  useEffect(() => {
+    dispatch(getrooms());
+  }, [dispatch]);
 
   const vipRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'VIP').slice(0, 3) : [];
-  const budgetRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'Budget').slice(0, 3) : [];
+  const budgetRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'Semi').slice(0, 3) : [];
 
+
+  console.log('All Rooms:', rooms); 
+  console.log('VIP Rooms:', vipRooms); 
+  console.log('Budget/Semi Rooms:', budgetRooms); 
+
+  const renderRooms = (rooms, RoomComponent) => {
+    if (status === 'loading') {
+      return <p>Loading...</p>;
+    }
+    if (status === 'failed') {
+      return <p>Error: {error}</p>;
+    }
+    return rooms.map((room, index) => (
+      <RoomComponent key={index} room={room} />
+    ));
+  };
 
   return (
     <div className="flex flex-col space-y-10">
@@ -51,11 +62,7 @@ export const Home = () => {
               Our VIP Rooms
             </h2>
             <div className="rooms my-10 flex flex-wrap gap-7 justify-center items-center">
-            {status === 'loading' && <p>Loading...</p>}
-              {status === 'failed' && <p>Error: {error}</p>}
-              {vipRooms.map((room, index) => (
-                <VIP key={index} room={room} />
-              ))}
+              {renderRooms(vipRooms, VIP)}
             </div>
           </div>
         </div>
@@ -64,11 +71,7 @@ export const Home = () => {
             Our Budget Rooms
           </h2>
           <div className="rooms mt-10 flex flex-wrap gap-7 justify-center items-center">
-          {status === 'loading' && <p>Loading...</p>}
-            {status === 'failed' && <p>Error: {error}</p>}
-            {budgetRooms.map((room, index) => (
-              <Budget key={index} room={room} />
-            ))}
+            {renderRooms(budgetRooms, VIP)}
           </div>
         </div>
       </section>
