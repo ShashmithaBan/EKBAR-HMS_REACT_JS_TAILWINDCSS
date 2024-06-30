@@ -5,7 +5,7 @@ import { About } from './About';
 import { VIP } from '../Rooms/VIP';
 import { Budget } from '../Rooms/Budget';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRoomsByType } from '../../Store/roomSlice';
+import { getRoomsByType, getrooms } from '../../Store/roomSlice';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -14,8 +14,7 @@ export const Home = () => {
   const error = useSelector((state) => state.room.error);
 
   useEffect(() => {
-    dispatch(getRoomsByType('VIP'));
-    dispatch(getRoomsByType('Semi'));
+    dispatch(getrooms());
   }, [dispatch]);
 
   const vipRooms = Array.isArray(rooms) ? rooms.filter(room => room.roomType === 'VIP').slice(0, 3) : [];
