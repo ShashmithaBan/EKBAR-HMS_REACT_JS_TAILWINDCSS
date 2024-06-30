@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 
 const rootReducer = combineReducers({
   room: roomReducer,
-  bookRoom: bookRoomReducer,
+  bookedroom: bookRoomReducer,
 });
 
 const store = configureStore({

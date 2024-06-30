@@ -10,12 +10,12 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloseIcon from "@mui/icons-material/Close";
 import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
-import { useDispatch } from "react-redux";
-import { addRoom } from "../../Store/roomSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addRoom, resetAddRoomStatus } from "../../Store/roomSlice";
 import { useNavigate } from "react-router-dom";
 
 const initialValues = {
@@ -29,6 +29,16 @@ export const AddRoom = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [uploadImage, setUploadImage] = useState(false);
+  const room = useSelector((state) => state.room);
+  const { addRoomStatus } = useSelector((state) => state.room);
+
+  useEffect(() => {
+    if (addRoomStatus === "success") {
+      setTimeout(() => {
+        dispatch(resetAddRoomStatus());
+      }, 3000); 
+    }
+  }, [addRoomStatus, dispatch]);
 
   const handleImageChange = async (e, setFieldValue, values) => {
     const file = e.target.files[0];
@@ -61,6 +71,11 @@ export const AddRoom = () => {
       <h1 className="relative text-center lg:text-left text-2xl font-semibold">
         Add New Room
       </h1>
+      {addRoomStatus === "success" && (
+        <p className='w-full text-green-500 bg-green-100 text-center py-2 border-2 border-green-500 rounded text-xs'>
+          Room Successfully Added
+        </p>
+      )}
       <div className="mt-5">
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ setFieldValue, values }) => (

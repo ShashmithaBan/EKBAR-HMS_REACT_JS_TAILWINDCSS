@@ -8,7 +8,23 @@ export const addBooking = createAsyncThunk(
   async (roomData, thunkAPI) => {
     try {
       const response = await axios.post(`${API}/api/bookings`, roomData);
+      console.log(response.data.bookingConfirmationCode);
       return response.data;
+      
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getRoomByBCode = createAsyncThunk(
+  'api/bookings/bcodereader',
+  async (code, thunkAPI) => {
+    try {
+
+      const response = await axios.get(`${API}/api/bookings/user/get?code=${code}`);
+ 
+      return response.data;
+     
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -36,8 +52,20 @@ export const bookRoomSlice = createSlice({
       .addCase(addBooking.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to add booking';
+      })
+      .addCase(getRoomByBCode.pending, (state) => {
+        state.loading = true;
+        state.error = '';
+      })
+      .addCase(getRoomByBCode.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookedrooms.push(action.payload);
+      })
+      .addCase(getRoomByBCode.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || 'Failed to get booking';
       });
   },
 });
 
-export default bookRoomSlice.reducers;
+export default bookRoomSlice.reducer;
