@@ -6,9 +6,11 @@ const API = 'http://localhost:5454';
 export const addRoom = createAsyncThunk(
   'room/addRoom',
   async (roomData, thunkAPI) => {
+    
     try {
       const response = await axios.post(`${API}/api/rooms/add/${roomData.pin}`, roomData);
       return response.data;
+      
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }

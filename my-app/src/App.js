@@ -10,6 +10,8 @@ import { Luxury } from './Components/Pages/Luxury';
 import { AddBooking } from './Components/Pages/AddBooking/AddBooking';
 import { AddRoom } from './Components/Pages/AddRoom/AddRoom';
 import { AllRooms } from './Components/Pages/AllRooms'; // Ensure correct path and filename
+import { Dashboard } from './Components/Pages/Dashboard/Dashboard';
+import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
   return (
@@ -17,7 +19,9 @@ const App = () => {
       <Routes>
         <Route path='/signin' element={<Signin />} />
         <Route path='/addroom' element={<AddRoom />} />
-        <Route path='/rooms' element={<AllRooms />} /> {/* Check import path */}
+        <Route path='/rooms' element={<AllRooms />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        
         <Route
           path='*'
           element={
